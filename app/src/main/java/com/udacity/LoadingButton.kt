@@ -8,6 +8,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.content_main.view.*
 import kotlin.properties.Delegates
 
@@ -30,6 +31,9 @@ class LoadingButton @JvmOverloads constructor(
         const val PROPERTY_RECT = "rect"
         const val PROPERTY_ARC = "arc"
 
+        const val DEFAULT_BACKGROUND_COLOR = R.color.colorPrimary
+        const val DEFAULT_TEXT_COLOR = R.color.white
+
         private var ARC_RADIUS = 40f
         private var LEFT = 500f
         private var TOP = 20f
@@ -38,6 +42,25 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private var circle = RectF(0f, 0f, 0f, 0f)
+
+    private var buttonBackgroundColor = 0
+    private var buttonTextColor = 0
+
+    init {
+        val attributes = context.theme.obtainStyledAttributes(attrs,
+            R.styleable.LoadingButton,
+            0,
+            0)
+
+        try {
+            buttonBackgroundColor = attributes.getColor(R.styleable.LoadingButton_buttonBackgroundColor,
+                ContextCompat.getColor(context, DEFAULT_BACKGROUND_COLOR))
+            buttonTextColor = attributes.getColor(R.styleable.LoadingButton_buttonTextColor,
+                ContextCompat.getColor(context, DEFAULT_TEXT_COLOR))
+        } finally {
+            attributes.recycle()
+        }
+    }
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
         when (new) {
