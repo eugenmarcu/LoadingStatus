@@ -47,16 +47,22 @@ class LoadingButton @JvmOverloads constructor(
     private var buttonTextColor = 0
 
     init {
-        val attributes = context.theme.obtainStyledAttributes(attrs,
+        val attributes = context.theme.obtainStyledAttributes(
+            attrs,
             R.styleable.LoadingButton,
             0,
-            0)
+            0
+        )
 
         try {
-            buttonBackgroundColor = attributes.getColor(R.styleable.LoadingButton_buttonBackgroundColor,
-                ContextCompat.getColor(context, DEFAULT_BACKGROUND_COLOR))
-            buttonTextColor = attributes.getColor(R.styleable.LoadingButton_buttonTextColor,
-                ContextCompat.getColor(context, DEFAULT_TEXT_COLOR))
+            buttonBackgroundColor = attributes.getColor(
+                R.styleable.LoadingButton_buttonBackgroundColor,
+                ContextCompat.getColor(context, DEFAULT_BACKGROUND_COLOR)
+            )
+            buttonTextColor = attributes.getColor(
+                R.styleable.LoadingButton_buttonTextColor,
+                ContextCompat.getColor(context, DEFAULT_TEXT_COLOR)
+            )
         } finally {
             attributes.recycle()
         }
