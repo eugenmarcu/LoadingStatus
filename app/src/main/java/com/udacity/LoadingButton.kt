@@ -122,7 +122,7 @@ class LoadingButton @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        paint.color = resources.getColor(R.color.colorPrimary)
+        paint.color = buttonBackgroundColor
         canvas?.drawRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), paint)
 
         if (downloading) {
@@ -142,7 +142,7 @@ class LoadingButton @JvmOverloads constructor(
             )
         }
 
-        paint.color = Color.WHITE
+        paint.color = buttonTextColor
         canvas?.drawText(textOfTheButton, widthSize / 2f, heightSize / 2f + 10f, paint)
     }
 
